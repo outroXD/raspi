@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home Page</title>
+    <meta name="description" content="Home Page">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
+    <script type="text/javascript" th:src="@{/jQuery/jquery.js}"></script>
+    <style>
+    </style>
+</head>
+<body>
+<table style=" position: fixed; top: 25%;left: 40%; border: 2px">
+    <tr></tr>
+    <tr class="form-group">
+        <td>
+            <label>Name</label>
+        </td>
+        <td>
+            <input type="text" class="form-control" placeholder="user name">
+        </td>
+    </tr>
+    <tr class="form-group">
+        <td>
+            <label>Email</label>
+        </td>
+        <td>
+            <input type="email" class="form-control" placeholder="example@example.com">
+        </td>
+    </tr>
+    <tr class="form-group">
+        <td align="middle" colspan="2">
+            <button type="submit" class="btn btn-success">Send invitation</button>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
