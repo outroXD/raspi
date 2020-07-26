@@ -2,3 +2,8 @@
 raspi.iml
 
 target
+
+storage
+!storage/.gitkeep
+resources
+!resources/*.sample

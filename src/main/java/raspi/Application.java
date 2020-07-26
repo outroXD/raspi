@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import raspi.wol.WakeOnLan;
 import raspi.wol.WakeOnLanConfig;
 
 @Configuration
@@ -28,19 +29,29 @@ public class Application extends SpringBootServletInitializer {
 
 @RestController
 class GreetingController {
-    @Autowired
-    private WakeOnLanConfig wakeOnLanConfig;
-
     @RequestMapping("/hello/{name}")
     String hello(@PathVariable String name) {
-        return "Hello, " + name + "!" + " : yaml: " + wakeOnLanConfig.toString();
+        return "Hello, " + name + "!";
     }
 }
 
 @RestController
 class WakeOnLanController {
-    @RequestMapping("/wol/{mac}")
-    Boolean wol(@PathVariable String mac) {
-        return true;
+    @Autowired
+    private WakeOnLanConfig wakeOnLanConfig;
+    @Autowired
+    private WakeOnLan wakeOnLan;
+
+    @RequestMapping("/wol")
+    String wol() {
+        Boolean flag = wakeOnLan.sendMagickPacket(
+                wakeOnLanConfig.getMacAddress(),
+                wakeOnLanConfig.getIpAddress(),
+                wakeOnLanConfig.getPort());
+
+        if (flag)
+            return "Success.";
+        else
+            return "Failed.";
     }
 }

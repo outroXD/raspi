@@ -1,0 +1,10 @@
+wol:
+  ipAddress: 255.255.255.255
+  macAddress: AA-AA-AA-AA-AA-AA
+  port: 50022
+
+logging:
+  file:
+    name: storage/log/raspi.log
+  level:
+    org.springframework.web: INFO

@@ -8,26 +8,31 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "wol")
 public class WakeOnLanConfig {
-    private String ip;
-    private String mac;
+    private String ipAddress;
+    private String macAddress;
+    private Integer port;
 
-    public void setIp(String ip) {
-        this.ip = ip;
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
     }
 
-    public void setMac(String mac) {
-        this.mac = mac;
+    public void setMacAddress(String macAddress) {
+        this.macAddress = macAddress;
     }
 
-    public String getIp() {
-        return ip;
+    public void setPort(Integer port) {
+        this.port = port;
     }
 
-    public String getMac() {
-        return mac;
+    public String getIpAddress() {
+        return ipAddress;
     }
 
-    public String toString() {
-        return "{" + this.getMac() + ", " + this.getIp() + "}";
+    public String getMacAddress() {
+        return macAddress;
+    }
+
+    public Integer getPort() {
+        return port;
     }
 }
