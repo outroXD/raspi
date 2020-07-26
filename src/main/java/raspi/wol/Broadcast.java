@@ -9,11 +9,11 @@ import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 
 @Component
-public class WakeOnLan {
-    private static final Logger logger = LoggerFactory.getLogger(WakeOnLan.class);
+public class Broadcast {
+    private static final Logger logger = LoggerFactory.getLogger(Broadcast.class);
 
-    public Boolean sendMagickPacket(String macAddress, String ipAddress, Integer port) {
-        logger.info("[Called: sendMagickPacket]");
+    public Boolean sendPacket(String macAddress, String ipAddress, Integer port) {
+        logger.info("[Called: sendPacket]");
         try {
             InetSocketAddress inetSocketAddress = new InetSocketAddress(ipAddress, port);
             byte[] packetByte = getMagickPacket(macAddress);
@@ -21,7 +21,7 @@ public class WakeOnLan {
             new DatagramSocket().send(datagramPacket);
 
         } catch (Exception e) {
-            logger.error("[Error: sendMagickPacket]" + e.toString());
+            logger.error("[Error: sendPacket]" + e.toString());
             return false;
         }
         return true;

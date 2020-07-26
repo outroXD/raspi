@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import raspi.wol.WakeOnLan;
+import raspi.wol.Broadcast;
 import raspi.wol.WakeOnLanConfig;
 
 @Configuration
@@ -36,19 +36,19 @@ class GreetingController {
 }
 
 @RestController
-class WakeOnLanController {
+class BroadcastingController {
+    private static final String ipAddress = "255.255.255.255";
+    @Autowired
+    private Broadcast broadcast;
     @Autowired
     private WakeOnLanConfig wakeOnLanConfig;
-    @Autowired
-    private WakeOnLan wakeOnLan;
 
-    @RequestMapping("/wol")
+    @RequestMapping("/broadcast/wol/start")
     String wol() {
-        Boolean flag = wakeOnLan.sendMagickPacket(
+        Boolean flag = broadcast.sendPacket(
                 wakeOnLanConfig.getMacAddress(),
-                wakeOnLanConfig.getIpAddress(),
+                ipAddress,
                 wakeOnLanConfig.getPort());
-
         if (flag)
             return "Success.";
         else
