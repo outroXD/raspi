@@ -8,13 +8,8 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "wol")
 public class WakeOnLanConfig {
-    private String ipAddress;
     private String macAddress;
     private Integer port;
-
-    public void setIpAddress(String ipAddress) {
-        this.ipAddress = ipAddress;
-    }
 
     public void setMacAddress(String macAddress) {
         this.macAddress = macAddress;
@@ -22,10 +17,6 @@ public class WakeOnLanConfig {
 
     public void setPort(Integer port) {
         this.port = port;
-    }
-
-    public String getIpAddress() {
-        return ipAddress;
     }
 
     public String getMacAddress() {
