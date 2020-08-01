@@ -45,10 +45,11 @@ class BroadcastingController {
 
     @RequestMapping("/broadcast/wol/start")
     String wol() {
-        PacketImplWakeOnLan packetImplWakeOnLan = new PacketImplWakeOnLan(globalConfig.getBroadcastAddress());
-        Boolean flag = packetImplWakeOnLan.send(
+        PacketImplWakeOnLan packetImplWakeOnLan = new PacketImplWakeOnLan(
+                globalConfig.getBroadcastAddress(),
                 wakeOnLanConfig.getMacAddress(),
                 wakeOnLanConfig.getPort());
+        Boolean flag = packetImplWakeOnLan.send();
 
         if (flag)
             return "Success.";

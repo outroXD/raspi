@@ -7,22 +7,29 @@ import org.springframework.util.StringUtils;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
+import java.util.Optional;
 
 abstract public class PacketAbstract {
     private static final Logger logger = LoggerFactory.getLogger(PacketAbstract.class);
 
     /* 送信先IPアドレス */
     private String ipAddress;
+    /* 送信先MACアドレス */
+    private String macAddress;
+    /* 送信先ポート */
+    private Integer port;
 
-    public PacketAbstract(String ipAddress) {
-        if (StringUtils.isEmpty(ipAddress)) {
-            throw new IllegalArgumentException("ip address must not be empty.");
+    public PacketAbstract(String ipAddress, String macAddress, Integer port) {
+        if (StringUtils.isEmpty(ipAddress)
+                || StringUtils.isEmpty(macAddress)) {
+            throw new IllegalArgumentException("Argument not allow null.");
         }
-
         this.ipAddress = ipAddress;
+        this.macAddress = macAddress;
+        this.port = port;
     }
 
-    public Boolean send(String macAddress, Integer port) {
+    public Boolean send() {
         logger.info("[Called: send]");
         try {
             InetSocketAddress inetSocketAddress = new InetSocketAddress(ipAddress, port);

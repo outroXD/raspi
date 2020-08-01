@@ -7,7 +7,7 @@ import raspi.packet.PacketAbstract;
 public class PacketImplWakeOnLan extends PacketAbstract {
     private static final Logger logger = LoggerFactory.getLogger(PacketImplWakeOnLan.class);
 
-    public PacketImplWakeOnLan(String ipAddress) {
-        super(ipAddress);
+    public PacketImplWakeOnLan(String ipAddress, String macAddress, Integer port) {
+        super(ipAddress, macAddress, port);
     }
 }
