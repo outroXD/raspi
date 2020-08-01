@@ -10,7 +10,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import raspi.wol.WakeOnLanConfig;
+import raspi.config.GlobalConfig;
+import raspi.wol.PacketImplWakeOnLan;
+import raspi.config.WakeOnLanConfig;
 
 @Configuration
 @ComponentScan
@@ -37,18 +39,17 @@ class GreetingController {
 @RestController
 class BroadcastingController {
     @Autowired
-    private Broadcast broadcast;
-    @Autowired
     private GlobalConfig globalConfig;
     @Autowired
     private WakeOnLanConfig wakeOnLanConfig;
 
     @RequestMapping("/broadcast/wol/start")
     String wol() {
-        Boolean flag = broadcast.sendPacket(
+        PacketImplWakeOnLan packetImplWakeOnLan = new PacketImplWakeOnLan(globalConfig.getBroadcastAddress());
+        Boolean flag = packetImplWakeOnLan.send(
                 wakeOnLanConfig.getMacAddress(),
-                globalConfig.getBroadcastAddress(),
                 wakeOnLanConfig.getPort());
+
         if (flag)
             return "Success.";
         else
