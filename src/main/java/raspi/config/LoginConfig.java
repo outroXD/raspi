@@ -7,16 +7,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "login")
-public class loginConfig {
-    private String usename;
+public class LoginConfig {
+    private String username;
     private String password;
 
-    public void setUsename(String username) {
-        this.usename = username;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getUsename() {
-        return this.usename;
+    public String getUsername() {
+        return this.username;
     }
 
     public void setPassword(String password) {
