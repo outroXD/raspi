@@ -8,7 +8,7 @@ import raspi.config.WakeOnLanConfig;
 import raspi.wol.PacketImplWakeOnLan;
 
 @RestController
-class BroadcastingController {
+class BroadcastPacketRestController {
     @Autowired
     private GlobalConfig globalConfig;
     @Autowired
