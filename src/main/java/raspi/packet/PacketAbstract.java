@@ -3,6 +3,7 @@ package raspi.packet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
+import raspi.log.LogUtil;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -12,15 +13,16 @@ abstract public class PacketAbstract {
     private static final Logger logger = LoggerFactory.getLogger(PacketAbstract.class);
 
     /* 送信先IPアドレス */
-    private String ipAddress;
+    private final String ipAddress;
     /* 送信先MACアドレス */
-    private String macAddress;
+    private final String macAddress;
     /* 送信先ポート */
-    private Integer port;
+    private final Integer port;
 
     public PacketAbstract(String ipAddress, String macAddress, Integer port) {
         if (StringUtils.isEmpty(ipAddress)
-                || StringUtils.isEmpty(macAddress)) {
+                || StringUtils.isEmpty(macAddress)
+                || port == null) {
             throw new IllegalArgumentException("Argument not allow null.");
         }
         this.ipAddress = ipAddress;
@@ -29,7 +31,7 @@ abstract public class PacketAbstract {
     }
 
     public Boolean send() {
-        logger.info("[Called: send]");
+        logger.info(LogUtil.getLogOutMethodNameInfo(new Object(){}.getClass().getEnclosingClass().getName()));
         try {
             InetSocketAddress inetSocketAddress = new InetSocketAddress(ipAddress, port);
             byte[] packetByte = this.getPacket(macAddress);
@@ -44,7 +46,7 @@ abstract public class PacketAbstract {
     }
 
     private byte[] getPacket(String macAddress) {
-        logger.info("[Called: getPacket]");
+        logger.info(LogUtil.getLogOutMethodNameInfo(new Object(){}.getClass().getEnclosingClass().getName()));
         byte[] packet = new byte[102];
         int index = 0;
         for (int i = 0; i < 6; i++) {
@@ -60,12 +62,11 @@ abstract public class PacketAbstract {
             packet[index++] = macAddressByte[4];
             packet[index++] = macAddressByte[5];
         }
-
         return packet;
     }
 
     private byte[] getMacAddressByte(String macAddress) {
-        logger.info("[Called: getMacAddressByte]");
+        logger.info(LogUtil.getLogOutMethodNameInfo(new Object(){}.getClass().getEnclosingClass().getName()));
         String[] macArray = macAddress.split("-");
         if (macArray.length != 6) {
             logger.error("[Error: getMacAddressByte] Mac Address Setting Error.");
@@ -75,7 +76,6 @@ abstract public class PacketAbstract {
         for (int i = 0; i < macArray.length; i++) {
             macAddressByte[i] = (byte)Integer.parseInt(macArray[i], 16);
         }
-
         return macAddressByte;
     }
 }
