@@ -45,27 +45,9 @@ abstract public class PacketAbstract {
         return true;
     }
 
-    private byte[] getPacket(String macAddress) {
-        logger.info(LogUtil.getLogOutMethodNameInfo(new Object(){}.getClass().getEnclosingClass().getName()));
-        byte[] packet = new byte[102];
-        int index = 0;
-        for (int i = 0; i < 6; i++) {
-            packet[index++] = (byte)0xff;
-        }
+    protected abstract byte[] getPacket(String macAddress);
 
-        byte[] macAddressByte = getMacAddressByte(macAddress);
-        for (int i = 0; i < 16; i++) {
-            packet[index++] = macAddressByte[0];
-            packet[index++] = macAddressByte[1];
-            packet[index++] = macAddressByte[2];
-            packet[index++] = macAddressByte[3];
-            packet[index++] = macAddressByte[4];
-            packet[index++] = macAddressByte[5];
-        }
-        return packet;
-    }
-
-    private byte[] getMacAddressByte(String macAddress) {
+    protected byte[] getMacAddressByte(String macAddress) {
         logger.info(LogUtil.getLogOutMethodNameInfo(new Object(){}.getClass().getEnclosingClass().getName()));
         String[] macArray = macAddress.split("-");
         if (macArray.length != 6) {
