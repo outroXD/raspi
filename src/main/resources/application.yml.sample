@@ -2,6 +2,9 @@ login:
   username: admin
   password: password
 
+api:
+  apikey: sample
+
 global:
   broadcastAddress: 255.255.255.255
 
