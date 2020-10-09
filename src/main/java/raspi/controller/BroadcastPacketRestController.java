@@ -10,7 +10,6 @@ import raspi.config.ApiConfig;
 import raspi.config.GlobalConfig;
 import raspi.config.WakeOnLanConfig;
 import raspi.wol.PacketImplWakeOnLan;
-import java.util.Optional;
 
 @RestController
 class BroadcastPacketRestController extends AbstractRestController {
@@ -28,9 +27,9 @@ class BroadcastPacketRestController extends AbstractRestController {
     }
 
     @RequestMapping({"/broadcast/wol/start", "/broadcast/wol/start/{apikey}"})
-    String wol(@PathVariable(name = "apikey", required = false) Optional<String> apikey) {
+    String wol(@PathVariable(name = "apikey") String apikey) {
         if (!isValidApiKey(apikey)) {
-            logger.error("");
+            logger.error("apiKey error.");
             return "Failed.";
         }
 

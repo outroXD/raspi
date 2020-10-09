@@ -1,9 +1,10 @@
 .idea
-raspi.iml
 
+node_modules
 target
 
 storage
 !storage/.gitkeep
 resources
 !resources/*.sample
+!resources/templates
