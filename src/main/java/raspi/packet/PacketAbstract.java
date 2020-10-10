@@ -46,18 +46,4 @@ abstract public class PacketAbstract {
     }
 
     protected abstract byte[] getPacket(String macAddress);
-
-    protected byte[] getMacAddressByte(String macAddress) {
-        logger.info(LogUtil.getLogOutMethodNameInfo(new Object(){}.getClass().getEnclosingClass().getName()));
-        String[] macArray = macAddress.split("-");
-        if (macArray.length != 6) {
-            logger.error("[Error: getMacAddressByte] Mac Address Setting Error.");
-        }
-
-        byte[] macAddressByte = new byte[6];
-        for (int i = 0; i < macArray.length; i++) {
-            macAddressByte[i] = (byte)Integer.parseInt(macArray[i], 16);
-        }
-        return macAddressByte;
-    }
 }
