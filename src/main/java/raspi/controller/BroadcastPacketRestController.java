@@ -26,9 +26,9 @@ class BroadcastPacketRestController extends AbstractRestController {
         this.wakeOnLanConfig = wakeOnLanConfig;
     }
 
-    @RequestMapping({"/broadcast/wol/start", "/broadcast/wol/start/{apikey}"})
-    String wol(@PathVariable(name = "apikey") String apikey) {
-        if (!isValidApiKey(apikey)) {
+    @RequestMapping({"/broadcast/wol/start", "/broadcast/wol/start/{apiKey}"})
+    public String wol(@PathVariable("apiKey") String apiKey) {
+        if (!isValidApiKey(apiKey)) {
             logger.error("apiKey error.");
             return "Failed.";
         }
@@ -37,11 +37,10 @@ class BroadcastPacketRestController extends AbstractRestController {
                 globalConfig.getBroadcastAddress(),
                 wakeOnLanConfig.getMacAddress(),
                 wakeOnLanConfig.getPort());
-        Boolean flag = packetImplWakeOnLan.send();
+        boolean flag = packetImplWakeOnLan.send();
 
-        if (flag)
-            return "Success.";
-        else
+        if (!flag)
             return "Failed.";
+        return "Success.";
     }
 }
