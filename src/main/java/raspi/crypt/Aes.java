@@ -21,7 +21,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 @Service
-public class Aes {
+public class Aes implements ICrypt {
     private static final Logger logger = LoggerFactory.getLogger(Aes.class);
 
     @Autowired
