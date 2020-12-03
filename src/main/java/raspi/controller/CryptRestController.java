@@ -18,13 +18,13 @@ public class CryptRestController {
     private Aes aes;
 
     @RequestMapping({"/crypt/aes/encrypt", "/crypt/aes/encrypt/{text}"})
-    public String encrypt(@PathVariable("text") String text) {
+    public String encrypt(@PathVariable("text") final String text) {
         Optional<String> res = aes.encrypt(text);
         return res.orElse("encrypt failed.");
     }
 
     @RequestMapping({"/crypt/aes/decrypt", "/crypt/aes/decrypt/{text}"})
-    public String decrypt(@PathVariable("text") String text) {
+    public String decrypt(@PathVariable("text") final String text) {
         Optional<String> res = aes.decrypt(text);
         return res.orElse("decrypt failed.");
     }

@@ -28,12 +28,12 @@ public class Aes implements ICrypt {
     private CryptConfig cryptConfig;
     private static final String FORMAT_UTF_8 = "UTF-8";
 
-    public Optional<String> encrypt(String text) {
+    public Optional<String> encrypt(final String text) {
         String res = null;
         try {
             byte[] byteText = text.getBytes(StandardCharsets.UTF_8);
-            SecretKeySpec keySpec = new SecretKeySpec(cryptConfig.getByteKey(FORMAT_UTF_8), "AES");
-            IvParameterSpec ivParameterSpec = new IvParameterSpec(cryptConfig.getByteVec(FORMAT_UTF_8));
+            final SecretKeySpec keySpec = new SecretKeySpec(cryptConfig.getByteKey(FORMAT_UTF_8), "AES");
+            final IvParameterSpec ivParameterSpec = new IvParameterSpec(cryptConfig.getByteVec(FORMAT_UTF_8));
 
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivParameterSpec);
@@ -53,12 +53,12 @@ public class Aes implements ICrypt {
         return Optional.ofNullable(res);
     }
 
-    public Optional<String> decrypt(String text) {
+    public Optional<String> decrypt(final String text) {
         String res = null;
         try {
             byte[] byteText = Base64.decodeBase64(text);
-            SecretKeySpec keySpec = new SecretKeySpec(cryptConfig.getByteKey(FORMAT_UTF_8), "AES");
-            IvParameterSpec ivParameterSpec = new IvParameterSpec(cryptConfig.getByteVec(FORMAT_UTF_8));
+            final SecretKeySpec keySpec = new SecretKeySpec(cryptConfig.getByteKey(FORMAT_UTF_8), "AES");
+            final IvParameterSpec ivParameterSpec = new IvParameterSpec(cryptConfig.getByteVec(FORMAT_UTF_8));
 
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, keySpec, ivParameterSpec);

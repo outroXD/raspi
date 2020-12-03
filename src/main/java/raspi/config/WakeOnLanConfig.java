@@ -19,9 +19,9 @@ public class WakeOnLanConfig {
     private String macAddress;
     private byte[] macAddressBytes;
     @NonNull
-    private Integer port;
+    private int port;
 
-    public void setMacAddress(String macAddress) {
+    public void setMacAddress(final String macAddress) {
         this.macAddress = macAddress;
     }
 
@@ -42,16 +42,16 @@ public class WakeOnLanConfig {
         }
         macAddressBytes = new byte[6];
         for (int i = 0; i < macArray.length; i++) {
-            macAddressBytes[i] = (byte)Integer.parseInt(macArray[i], 16);
+            macAddressBytes[i] = (byte) Integer.parseInt(macArray[i], 16);
         }
         return macAddressBytes;
     }
 
-    public void setPort(Integer port) {
+    public void setPort(final int port) {
         this.port = port;
     }
 
-    public Integer getPort() {
+    public int getPort() {
         return port;
     }
 }

@@ -12,7 +12,7 @@ public class ApiConfig {
     @NonNull
     private String apiKey;
 
-    public void setApikey(String apikey) {
+    public void setApikey(final String apikey) {
         this.apiKey = apikey;
     }
 

@@ -21,11 +21,11 @@ public class CryptConfig {
         return this.key;
     }
 
-    public void setKey(String key) {
+    public void setKey(final String key) {
         this.key = key;
     }
 
-    public byte[] getByteKey(String format) throws UnsupportedEncodingException {
+    public byte[] getByteKey(final String format) throws UnsupportedEncodingException {
         return this.key.getBytes(format);
     }
 
@@ -33,11 +33,11 @@ public class CryptConfig {
         return this.vec;
     }
 
-    public void setVec(String vec) {
+    public void setVec(final String vec) {
         this.vec = vec;
     }
 
-    public byte[] getByteVec(String format) throws UnsupportedEncodingException {
+    public byte[] getByteVec(final String format) throws UnsupportedEncodingException {
         return this.vec.getBytes(format);
     }
 }

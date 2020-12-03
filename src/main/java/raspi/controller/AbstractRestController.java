@@ -7,7 +7,7 @@ public class AbstractRestController {
     @Autowired
     ApiConfig apiConfig;
 
-    protected boolean isValidApiKey(String apikey) {
+    protected boolean isValidApiKey(final String apikey) {
         return apiConfig.getApikey().equals(apikey);
     }
 }

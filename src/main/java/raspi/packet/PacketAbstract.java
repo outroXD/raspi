@@ -23,9 +23,9 @@ abstract public class PacketAbstract {
         logger.info(LogUtil.getLogOutMethodNameInfo(new Object(){}.getClass().getEnclosingClass().getName()));
 
         try {
-            InetSocketAddress inetSocketAddress = new InetSocketAddress(globalConfig.getBroadcastAddress(), wakeOnLanConfig.getPort());
+            final InetSocketAddress inetSocketAddress = new InetSocketAddress(globalConfig.getBroadcastAddress(), wakeOnLanConfig.getPort());
             byte[] packetByte = this.getPacket(wakeOnLanConfig.getMacAddress());
-            DatagramPacket datagramPacket = new DatagramPacket(packetByte, packetByte.length, inetSocketAddress);
+            final DatagramPacket datagramPacket = new DatagramPacket(packetByte, packetByte.length, inetSocketAddress);
             new DatagramSocket().send(datagramPacket);
         } catch (Exception e) {
             logger.error("[Error: send]" + e.toString());

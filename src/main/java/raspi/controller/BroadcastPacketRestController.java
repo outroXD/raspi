@@ -25,7 +25,7 @@ class BroadcastPacketRestController extends AbstractRestController {
             return "Failed.";
         }
 
-        boolean flag = packetImplWakeOnLan.send();
+        final boolean flag = packetImplWakeOnLan.send();
 
         if (!flag)
             return "Failed.";

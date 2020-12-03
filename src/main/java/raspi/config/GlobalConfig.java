@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class GlobalConfig {
     private String broadcastAddress;
 
-    public void setBroadcastAddress(String broadcastAddress) {
+    public void setBroadcastAddress(final String broadcastAddress) {
         this.broadcastAddress = broadcastAddress;
     }
 
